@@ -12,14 +12,14 @@ while true; do
   letsencrypt="$(diff <(echo "${certs}" | sort) <(echo "${domains}" | sort) | grep '>' | cut -d' ' -f2)"
 
   for domain in `echo "${letsencrypt}"`; do
-    if [ "$(dig +short $domain)" == "$IP" ]; then
+    if [ "$(host $domain | awk '/has address/ { print $4 ; exit }')" == "$IP" ]; then
       letsencrypt certonly -d $domain
 
       if [ -d $CERTS_PATH/$domain ]; then
         cat $CERTS_PATH/$domain/fullchain1.pem $CERTS_PATH/$domain/privkey1.pem > $HAPROXY_PATH/certs/$domain.pem
       fi
     fi
-    if [ "$(dig +short www.$domain)" == "$IP" ]; then
+    if [ "$(host www.$domain | awk '/has address/ { print $4 ; exit }')" == "$IP" ]; then
       letsencrypt certonly -d www.$domain
       if [ -d $CERTS_PATH/www.$domain ]; then
         cat $CERTS_PATH/www.$domain/fullchain1.pem $CERTS_PATH/www.$domain/privkey1.pem > $HAPROXY_PATH/certs/www.$domain.pem
