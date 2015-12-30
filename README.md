@@ -1,4 +1,4 @@
 # docker-letsencrypt
-letsencrypt container for HAproxy service
+letsencrypt container for HAProxy service
 
-Check [haproxy](https://github.com/indiehosters/haproxy) service to see how to use it.
+Check [HAProxy](https://github.com/indiehosters/haproxy) service to see how to use it.
