@@ -8,7 +8,7 @@ trap exit SIGHUP SIGINT SIGTERM
 
 function issue_cert () {
   if [ "$(ping -c1 -n $domain | head -n1 | sed 's/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g')" == "$IP" ]; then
-    le issue /html-root $1
+    /le/le.sh issue /html-root $1
     if [ -d $CERTS_PATH/$1 ]; then
       cat $CERTS_PATH/$1/$1.cer $CERTS_PATH/$1/ca.cer $CERTS_PATH/$1/$1.key > $HAPROXY_PATH/certs/$1.pem
     fi
