@@ -9,9 +9,7 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/* \
       /tmp/* \
       /var/tmp/* \
- && git clone https://github.com/Neilpang/le.git \
- && cd le \
- && ./le.sh install
+ && curl https://get.acme.sh | sh
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
