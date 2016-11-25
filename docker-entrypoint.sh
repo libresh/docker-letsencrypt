@@ -25,5 +25,6 @@ while true; do
   for domain in `echo "${letsencrypt}"`; do
     issue_cert $domain
   done
+  acme.sh --cron --home $CERTS_PATH
   inotifywait .
 done
