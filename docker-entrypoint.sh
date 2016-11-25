@@ -1,13 +1,13 @@
 #!/bin/bash -eux
 
 HAPROXY_PATH=/etc/haproxy
-CERTS_PATH=/root/.acme.sh
+CERTS_PATH=/var/certs
 IP=`curl http://icanhazip.com/`
 trap exit SIGHUP SIGINT SIGTERM
 
 function issue_cert () {
   if [ "$(ping -c1 -n $1 | head -n1 | sed 's/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g')" == "$IP" ]; then
-    /root/.acme.sh/acme.sh \
+    acme.sh \
       --issue \
       -d $1 \
       -w /html-root \
