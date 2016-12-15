@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
  && cd acme.sh \
  && ./acme.sh --install \
       --home /usr/bin \
-      --certhome  /var/certs
+      --certhome /var/certs
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
