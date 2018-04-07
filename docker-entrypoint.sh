@@ -6,7 +6,7 @@ IP=`curl http://icanhazip.com/`
 trap exit SIGHUP SIGINT SIGTERM
 
 function issue_cert () {
-  if [ "$(host -t A $1|awk '{print $NF}'|head -n1)" == "$IP" ]; then
+  if [ "$(getent hosts $1 | awk '{ print $1 }')" == "$IP" ]; then
     acme.sh \
       --home /usr/bin \
       --issue \
